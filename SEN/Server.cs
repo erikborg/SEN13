@@ -41,9 +41,21 @@ namespace SEN
 
             while(true)
             {
-                TcpClient client = this.tcpListener.AcceptTcpClient();
-                this.clientList.Add(client);
+                try
+                {
+                    TcpClient client = this.tcpListener.AcceptTcpClient();
+                    this.clientList.Add(client);
+                }
+                catch (Exception ex)
+                {
+                    // closed 
+                }
             }
+        }
+
+        public string getIP()
+        {
+            return ((IPEndPoint)this.tcpListener.LocalEndpoint).Address.ToString();
         }
 
         public void sendString(string message)
@@ -75,9 +87,7 @@ namespace SEN
             this.tcpListener.Stop();
             foreach (TcpClient client in this.clientList)
             {
-                NetworkStream clientStream = client.GetStream();
-                clientStream.Close();
-                this.clientList.Remove(client);
+                client.GetStream().Close();
             }
 
             this.clientList.Clear();

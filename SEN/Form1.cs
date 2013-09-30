@@ -14,6 +14,7 @@ namespace SEN
     {
         XmlGenerator XmlGenerator;
         Server server;
+        string ip;
 
         //vehicle properties
         int vehicleID = 0;
@@ -32,6 +33,8 @@ namespace SEN
             if (server == null)
             {
                 server = new Server();
+                ip = server.getIP();
+                ipLabel.Text = ip;
                 serverStartButton.Text = "Stop server";
             }
             else

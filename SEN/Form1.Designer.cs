@@ -34,6 +34,7 @@
             this.createBusButton = new System.Windows.Forms.Button();
             this.createBikeButton = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.ipLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // serverStartButton
@@ -94,9 +95,18 @@
             this.listBox1.Size = new System.Drawing.Size(271, 108);
             this.listBox1.TabIndex = 10;
             // 
+            // ipLabel
+            // 
+            this.ipLabel.AutoSize = true;
+            this.ipLabel.Location = new System.Drawing.Point(97, 19);
+            this.ipLabel.Name = "ipLabel";
+            this.ipLabel.Size = new System.Drawing.Size(0, 13);
+            this.ipLabel.TabIndex = 11;
+            // 
             // ProjectSEN
             // 
             this.ClientSize = new System.Drawing.Size(401, 167);
+            this.Controls.Add(this.ipLabel);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.createBikeButton);
             this.Controls.Add(this.createBusButton);
@@ -106,6 +116,7 @@
             this.Name = "ProjectSEN";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -121,6 +132,7 @@
         private System.Windows.Forms.Button createBusButton;
         private System.Windows.Forms.Button createBikeButton;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label ipLabel;
     }
 }
 
