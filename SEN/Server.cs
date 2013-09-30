@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Net;
 
 
+
 namespace SEN
 {
     class Server
@@ -46,9 +47,10 @@ namespace SEN
                     TcpClient client = this.tcpListener.AcceptTcpClient();
                     this.clientList.Add(client);
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    // closed 
+                    // closed
+                    Console.WriteLine(e.ToString());
                 }
             }
         }
@@ -73,6 +75,7 @@ namespace SEN
                 }
                 catch(Exception e)
                 {
+                    Console.WriteLine("Sendstring error:{0}", e);
                     clientStream.Close();
                     this.clientList.Remove(client);
                 }
@@ -82,7 +85,6 @@ namespace SEN
 
         public void close()
         {
-            // TODO Close Server and stop all connections.
             // Test with http://sockettest.sourceforge.net/
             this.tcpListener.Stop();
             foreach (TcpClient client in this.clientList)
