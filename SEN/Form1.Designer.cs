@@ -1,6 +1,6 @@
 ﻿namespace SEN
 {
-    partial class connectButton
+    partial class ProjectSEN
     {
         /// <summary>
         /// Required designer variable.
@@ -130,7 +130,7 @@
             this.listBox1.Size = new System.Drawing.Size(271, 108);
             this.listBox1.TabIndex = 10;
             // 
-            // connectButton
+            // ProjectSEN
             // 
             this.ClientSize = new System.Drawing.Size(401, 167);
             this.Controls.Add(this.listBox1);
@@ -143,7 +143,8 @@
             this.Controls.Add(this.portField);
             this.Controls.Add(this.ipField);
             this.Controls.Add(this.button2);
-            this.Name = "connectButton";
+            this.Name = "ProjectSEN";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.ResumeLayout(false);
             this.PerformLayout();
 

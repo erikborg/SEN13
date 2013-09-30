@@ -16,7 +16,7 @@ namespace SEN
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new connectButton());
+            Application.Run(new ProjectSEN());
         }
     }
 }

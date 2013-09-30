@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace SEN
 {
-    public partial class connectButton : Form
+    public partial class ProjectSEN : Form
     {
-        public connectButton()
+        XmlGenerator XmlGenerator;
+
+        //vehicle properties
+        int vehicleID = 0;
+        string location { get; set; }
+        string direction { get; set; }
+
+        public ProjectSEN()
         {
             InitializeComponent();
+            XmlGenerator = new XmlGenerator();
         }
 
         private void connectButton_Click(object sender, EventArgs e)
@@ -25,21 +33,46 @@ namespace SEN
         private void clearButton_Click(object sender, EventArgs e)
         {
             // clearButton XML
+            XmlGenerator.ClearXML();
+            listBox1.Items.Insert(0, "Cleared XML");
         }
 
         private void createCarButton_Click(object sender, EventArgs e)
         {
             // create car
+            generateVehicle("car");
         }
 
         private void createBikeButton_Click(object sender, EventArgs e)
         {
             // create bike
+            generateVehicle("bike");
         }
 
         private void createBusButton_Click(object sender, EventArgs e)
         {
             // create bus
+            generateVehicle("bus");
+        }
+
+        private void generateVehicle(string vehicle)
+        {
+            string logEntry = "";
+
+            //add a vehicle to our XML. If it's added successfully, up the vehicle ID and add a log entry
+            if (XmlGenerator.GenerateVehicle(vehicleID.ToString(), vehicle, this.location, this.direction))
+            {
+                vehicleID++;
+                logEntry = String.Concat("Succesfully added a ", vehicle, " to the XML file");
+            }
+            //notify the user that something went wrong
+            else
+            {
+                logEntry = String.Concat("Failed to add a ", vehicle, " to the XML file. View console output for details");
+            }
+
+            //add the text to our log
+            listBox1.Items.Insert(0, logEntry);
         }
     }
 }
