@@ -13,6 +13,7 @@ namespace SEN
     public partial class ProjectSEN : Form
     {
         XmlGenerator XmlGenerator;
+        Server server;
 
         //vehicle properties
         int vehicleID = 0;
@@ -21,13 +22,24 @@ namespace SEN
 
         public ProjectSEN()
         {
+            server = null;
             InitializeComponent();
             XmlGenerator = new XmlGenerator();
         }
 
-        private void connectButton_Click(object sender, EventArgs e)
+        private void serverStart_Click(object sender, EventArgs e)
         {
-            // Connect to ip:port
+            if (server == null)
+            {
+                server = new Server();
+                serverStartButton.Text = "Stop server";
+            }
+            else
+            {
+                server.close();
+                server = null;
+                serverStartButton.Text = "Start server";
+            }
         }
 
         private void clearButton_Click(object sender, EventArgs e)

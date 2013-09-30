@@ -28,11 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button2 = new System.Windows.Forms.Button();
-            this.ipField = new System.Windows.Forms.TextBox();
-            this.portField = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.serverStartButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
             this.createCarButton = new System.Windows.Forms.Button();
             this.createBusButton = new System.Windows.Forms.Button();
@@ -40,47 +36,15 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // button2
+            // serverStartButton
             // 
-            this.button2.Location = new System.Drawing.Point(211, 11);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Connect";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.connectButton_Click);
-            // 
-            // ipField
-            // 
-            this.ipField.Location = new System.Drawing.Point(40, 13);
-            this.ipField.Name = "ipField";
-            this.ipField.Size = new System.Drawing.Size(100, 20);
-            this.ipField.TabIndex = 1;
-            // 
-            // portField
-            // 
-            this.portField.Location = new System.Drawing.Point(162, 13);
-            this.portField.Name = "portField";
-            this.portField.Size = new System.Drawing.Size(43, 20);
-            this.portField.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(146, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(10, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = ":";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(20, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "IP:";
+            this.serverStartButton.Location = new System.Drawing.Point(15, 10);
+            this.serverStartButton.Name = "serverStartButton";
+            this.serverStartButton.Size = new System.Drawing.Size(75, 23);
+            this.serverStartButton.TabIndex = 0;
+            this.serverStartButton.Text = "Start server";
+            this.serverStartButton.UseVisualStyleBackColor = true;
+            this.serverStartButton.Click += new System.EventHandler(this.serverStart_Click);
             // 
             // clearButton
             // 
@@ -138,15 +102,10 @@
             this.Controls.Add(this.createBusButton);
             this.Controls.Add(this.createCarButton);
             this.Controls.Add(this.clearButton);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.portField);
-            this.Controls.Add(this.ipField);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.serverStartButton);
             this.Name = "ProjectSEN";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -156,11 +115,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox ipField;
-        private System.Windows.Forms.TextBox portField;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button serverStartButton;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button createCarButton;
         private System.Windows.Forms.Button createBusButton;

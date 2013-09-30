@@ -16,9 +16,9 @@ namespace SEN
         private Thread listenThread;
         private List<TcpClient> clientList;
 
-        public Server(string ip, int port)
+        public Server()
         {
-            this.tcpListener = new TcpListener(IPAddress.Any, port);
+            this.tcpListener = new TcpListener(IPAddress.Any, 1337);
             this.clientList = new List<TcpClient>();
             try
             {
@@ -51,7 +51,7 @@ namespace SEN
             ASCIIEncoding encoder = new ASCIIEncoding();
             byte[] buffer = encoder.GetBytes(message);
 
-            foreach (TcpClient client in clientList)
+            foreach (TcpClient client in this.clientList)
             {
                 NetworkStream clientStream = client.GetStream();
                 try
@@ -66,6 +66,21 @@ namespace SEN
                 }
             }
             
+        }
+
+        public void close()
+        {
+            // TODO Close Server and stop all connections.
+            // Test with http://sockettest.sourceforge.net/
+            this.tcpListener.Stop();
+            foreach (TcpClient client in this.clientList)
+            {
+                NetworkStream clientStream = client.GetStream();
+                clientStream.Close();
+                this.clientList.Remove(client);
+            }
+
+            this.clientList.Clear();
         }
     }
 }
