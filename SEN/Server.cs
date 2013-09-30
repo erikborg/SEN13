@@ -7,8 +7,6 @@ using System.Threading;
 using System.Net.Sockets;
 using System.Net;
 
-
-
 namespace SEN
 {
     class Server
