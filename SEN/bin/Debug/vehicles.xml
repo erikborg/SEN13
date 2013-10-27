@@ -1,2 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root />
+<root>
+  <Vehicle>
+    <id>0</id>
+    <type>car</type>
+    <location />
+    <direction />
+  </Vehicle>
+  <Vehicle>
+    <id>1</id>
+    <type>bike</type>
+    <location />
+    <direction />
+  </Vehicle>
+  <Vehicle>
+    <id>2</id>
+    <type>bus</type>
+    <location />
+    <direction />
+  </Vehicle>
+</root>

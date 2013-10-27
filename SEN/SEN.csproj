@@ -54,6 +54,15 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />
+    <Compile Include="Shared\Enums\Detection.cs" />
+    <Compile Include="Shared\Enums\Direction.cs" />
+    <Compile Include="Shared\Enums\Location.cs" />
+    <Compile Include="Shared\Enums\TrafficLightNumber.cs" />
+    <Compile Include="Shared\Enums\TrafficLightState.cs" />
+    <Compile Include="Shared\Enums\VehicleType.cs" />
+    <Compile Include="Shared\Models\Light.cs" />
+    <Compile Include="Shared\Models\State.cs" />
+    <Compile Include="Shared\Models\Vehicle.cs" />
     <Compile Include="XmlGenerator.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -80,6 +89,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

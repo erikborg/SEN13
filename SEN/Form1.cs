@@ -12,6 +12,10 @@ namespace SEN
 {
     public partial class ProjectSEN : Form
     {
+        //lock object, used in XmlGenerator class to lock the usage of the xml file.
+        //also used to lock the usage of the xml file when sending a new batch of data.
+        private Object _lock = new Object();
+
         XmlGenerator XmlGenerator;
         Server server;
         string ip;
@@ -45,11 +49,16 @@ namespace SEN
             }
         }
 
+        #region XML button actions
+
         private void clearButton_Click(object sender, EventArgs e)
         {
-            // clearButton XML
-            XmlGenerator.ClearXML();
-            listBox1.Items.Insert(0, "Cleared XML");
+            lock (_lock)
+            {
+                // clearButton XML
+                XmlGenerator.ClearXML();
+                listBox1.Items.Insert(0, "Cleared XML");
+            }
         }
 
         private void createCarButton_Click(object sender, EventArgs e)
@@ -74,20 +83,25 @@ namespace SEN
         {
             string logEntry = "";
 
-            //add a vehicle to our XML. If it's added successfully, up the vehicle ID and add a log entry
-            if (XmlGenerator.GenerateVehicle(vehicleID.ToString(), vehicle, this.location, this.direction))
+            lock (_lock)
             {
-                vehicleID++;
-                logEntry = String.Concat("Succesfully added a ", vehicle, " to the XML file");
-            }
-            //notify the user that something went wrong
-            else
-            {
-                logEntry = String.Concat("Failed to add a ", vehicle, " to the XML file. View console output for details");
+                //add a vehicle to our XML. If it's added successfully, up the vehicle ID and add a log entry
+                if (XmlGenerator.GenerateVehicle(vehicleID.ToString(), vehicle, this.location, this.direction))
+                {
+                    vehicleID++;
+                    logEntry = String.Concat("Succesfully added a ", vehicle, " to the XML file");
+                }
+                //notify the user that something went wrong
+                else
+                {
+                    logEntry = String.Concat("Failed to add a ", vehicle, " to the XML file. View console output for details");
+                }
             }
 
             //add the text to our log
             listBox1.Items.Insert(0, logEntry);
         }
+
+        #endregion
     }
 }

@@ -1,0 +1,9 @@
+C:\Users\Erik\Documents\GitHub\SEN13\SEN\bin\Debug\SEN.exe.config
+C:\Users\Erik\Documents\GitHub\SEN13\SEN\obj\Debug\SEN.exe
+C:\Users\Erik\Documents\GitHub\SEN13\SEN\obj\Debug\SEN.pdb
+C:\Users\Erik\Documents\GitHub\SEN13\SEN\bin\Debug\SEN.exe
+C:\Users\Erik\Documents\GitHub\SEN13\SEN\bin\Debug\SEN.pdb
+C:\Users\Erik\Documents\GitHub\SEN13\SEN\obj\Debug\SEN.csprojResolveAssemblyReference.cache
+C:\Users\Erik\Documents\GitHub\SEN13\SEN\obj\Debug\SEN.ProjectSEN.resources
+C:\Users\Erik\Documents\GitHub\SEN13\SEN\obj\Debug\SEN.Properties.Resources.resources
+C:\Users\Erik\Documents\GitHub\SEN13\SEN\obj\Debug\SEN.csproj.GenerateResource.Cache
