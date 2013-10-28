@@ -8,13 +8,13 @@ using System.Xml.Linq;
 
 namespace SEN
 {
-    class XmlGenerator
+    public class XmlGenerator
     {
         //path to our XML
         public const string path = @"vehicles.xml";
         
         //the xdoc representation of our XML
-        XDocument xml;
+        public XDocument xml;
 
         /// <summary>
         /// Constructor

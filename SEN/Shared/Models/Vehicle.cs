@@ -46,7 +46,7 @@ namespace SEN.Shared.Models
 
         public TrafficLightNumber getCarLight()
         {
-            var sum = (int)location + (int)direction;
+            var sum = (int)location - (int)direction;
 
             return (sum % 2 == 0) ? TrafficLightNumber.CarStraight : 
                 (sum == -1 || sum == 3) ? TrafficLightNumber.CarLeft : TrafficLightNumber.CarRight;
