@@ -12,10 +12,13 @@ namespace SEN
         Simulation simulation;
         Thread simThread;
 
-        public Simulator()
+        public Simulator(Server server)
         {
-            simulation = new Simulation();
-            simThread = new Thread(new ThreadStart(simulation.Run));
+            if (server != null)
+            {
+                simulation = new Simulation(server);
+                simThread = new Thread(new ThreadStart(simulation.Run));
+            }
         }
 
         public void Start()

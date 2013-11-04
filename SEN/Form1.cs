@@ -22,6 +22,7 @@ namespace SEN
 
         XmlGenerator XmlGenerator;
         Server server;
+        Simulator simulator;
         string ip;
 
         //vehicle properties
@@ -48,12 +49,16 @@ namespace SEN
                 server = new Server();
                 ip = server.getIP();
                 ipLabel.Text = ip;
+                simulator = new Simulator(server);
+                simulator.Start();
                 serverStartButton.Text = "Stop server";
             }
             else
             {
                 server.close();
                 server = null;
+                simulator.Stop();
+                simulator = null;
                 serverStartButton.Text = "Start server";
             }
         }
@@ -142,42 +147,27 @@ namespace SEN
 
         private void sendButton_Click(object sender, EventArgs e)
         {
-            State state = new State();
-            state.VehicleState = readFromXml();
-            //TODO: add lightstate + action
+            
+            // replaced with simulation classes
 
             this.XmlGenerator.ClearXML();
         }
 
-        private List<Vehicle> readFromXml()
+        
+        // Waarom ik dit heb gemaakt geen idee.
+        private List<Light> startLightStates()
         {
-            List<Vehicle> vehicles = new List<Vehicle>();
+            List<Light> lights = new List<Light>();
+            // WTF voor elk lampje een start definitie ?!!!
+            Light North = new Light();
+            North.Location = SEN.Shared.Location.North;
+            North.Number = SEN.Shared.TrafficLightNumber.Bicycle;
+            North.State = SEN.Shared.TrafficLightState.Red;
 
-            this.XmlGenerator.xml = XDocument.Load(XmlGenerator.path);
+            lights.Add(North);
 
-            foreach (XElement vehic in this.XmlGenerator.xml.Root.Nodes())
-            {
-                Vehicle vehicle = new Vehicle();
-                vehicle.id = vehic.Element("id").Value;
-                
-                vehicle.type = 
-                    (vehic.Element("type").Value.ToLower() == "car") ? VehicleType.Car : 
-                    (vehic.Element("type").Value.ToLower() == "bike") ? VehicleType.Bicycle : VehicleType.Bus;
 
-                vehicle.location = 
-                    vehic.Element("location").Value.ToLower() == "north" ? SEN.Shared.Location.North :
-                    vehic.Element("location").Value.ToLower() == "east" ? SEN.Shared.Location.East :
-                    vehic.Element("location").Value.ToLower() == "south" ? SEN.Shared.Location.South : SEN.Shared.Location.West;
-                
-                vehicle.direction =
-                    vehic.Element("direction").Value.ToLower() == "north" ? SEN.Shared.Enums.Direction.North :
-                    vehic.Element("direction").Value.ToLower() == "east" ? SEN.Shared.Enums.Direction.East :
-                    vehic.Element("direction").Value.ToLower() == "south" ? SEN.Shared.Enums.Direction.South : SEN.Shared.Enums.Direction.West;
-
-                vehicles.Add(vehicle);
-            }
-
-            return vehicles;            
+            return lights;
         }
     }
 }

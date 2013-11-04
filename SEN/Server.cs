@@ -62,8 +62,9 @@ namespace SEN
         {
             ASCIIEncoding encoder = new ASCIIEncoding();
             byte[] buffer = encoder.GetBytes(message);
+            List<TcpClient> clients = this.clientList.ToList();
 
-            foreach (TcpClient client in this.clientList)
+            foreach (TcpClient client in clients)
             {
                 NetworkStream clientStream = client.GetStream();
                 try

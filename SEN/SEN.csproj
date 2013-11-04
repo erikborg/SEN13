@@ -63,6 +63,8 @@
     <Compile Include="Shared\Models\Light.cs" />
     <Compile Include="Shared\Models\State.cs" />
     <Compile Include="Shared\Models\Vehicle.cs" />
+    <Compile Include="Simulation.cs" />
+    <Compile Include="Simulator.cs" />
     <Compile Include="XmlGenerator.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
