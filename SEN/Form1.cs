@@ -152,22 +152,5 @@ namespace SEN
 
             this.XmlGenerator.ClearXML();
         }
-
-        
-        // Waarom ik dit heb gemaakt geen idee.
-        private List<Light> startLightStates()
-        {
-            List<Light> lights = new List<Light>();
-            // WTF voor elk lampje een start definitie ?!!!
-            Light North = new Light();
-            North.Location = SEN.Shared.Location.North;
-            North.Number = SEN.Shared.TrafficLightNumber.Bicycle;
-            North.State = SEN.Shared.TrafficLightState.Red;
-
-            lights.Add(North);
-
-
-            return lights;
-        }
     }
 }
