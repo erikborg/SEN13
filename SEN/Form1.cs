@@ -175,13 +175,13 @@ namespace SEN
         private void sendButton_Click(object sender, EventArgs e)
         {
             State state = new State();
+
+            //Add vehicles, lights and actions
             state.VehicleState = readFromXml();
-            
-            //TODO: add lightstate + action
             state.LightState = getLightsAndState(state.VehicleState);
             state.Action = this.Actions;
             
-            // replaced with simulation classes
+            //TODO: send state object as json
 
             this.XmlGenerator.ClearXML();
         }
