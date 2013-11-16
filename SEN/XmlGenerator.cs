@@ -80,5 +80,26 @@ namespace SEN
                 return false;
             }
         }
+
+        /// <summary>
+        /// Method used to clear our XML
+        /// </summary>
+        public void ClearXML(List<string> actions)
+        {
+            foreach (string a in actions)
+            {
+                try
+                {
+                    xml.Descendants("Vehicle")
+                       .Where(child => child.Descendants("id").First().Value == a)
+                       .Remove();
+                    xml.Save(path);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(String.Format("Unable to remove action with number: {0}. \r\n" + e.ToString(), a));
+                }
+            }
+        }
     }
 }

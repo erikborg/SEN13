@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using SEN.Shared;
+using System.Web.Script.Serialization;
 
 namespace SEN
 {
@@ -181,9 +182,12 @@ namespace SEN
             state.LightState = getLightsAndState(state.VehicleState);
             state.Action = this.Actions;
             
-            //TODO: send state object as json
+            //send state object as json
+            var json = new JavaScriptSerializer().Serialize(state);
+            Console.WriteLine(json);
 
-            this.XmlGenerator.ClearXML();
+            //remove the vehicles with actions from the xml
+            this.XmlGenerator.ClearXML(this.Actions);
         }
             
         private List<Vehicle> readFromXml()
