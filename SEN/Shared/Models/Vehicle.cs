@@ -35,7 +35,7 @@ namespace SEN.Shared.Models
         // priority -> (number of cars in queue) * (time since 1st car in queue)
         // duration !> 30sec (?)
 
-        public TrafficLightNumber TrafficLightNumer
+        public TrafficLightNumber TrafficLightNumber
         {
             get
             {
