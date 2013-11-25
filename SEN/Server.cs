@@ -43,6 +43,8 @@ namespace SEN
                 try
                 {
                     TcpClient client = this.tcpListener.AcceptTcpClient();
+                    // keep-alive
+                    client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
                     this.clientList.Add(client);
                     Console.WriteLine("New client connected");
                 }
