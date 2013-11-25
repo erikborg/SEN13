@@ -99,7 +99,7 @@ namespace SEN
                 //remove the vehicles with actions from the xml
                 this.xmlGenerator.ClearXML(this.Actions);
                 // wait van 10000 miliseconden, of meer :)
-                Thread.Sleep(15000);
+                Thread.Sleep(5000);
             }
         }
 

@@ -73,15 +73,16 @@ namespace SEN
 
             foreach (TcpClient client in clients)
             {
+
                 NetworkStream clientStream = client.GetStream();
                 try
                 {
                     clientStream.Write(buffer, 0, buffer.Length);
                     clientStream.Flush();
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    Console.WriteLine("Sendstring error:{0}", e);
+                    Console.WriteLine("Disconnected client: {1} ,Connected: {0}", client.Connected, client.Client.RemoteEndPoint);
                     clientStream.Close();
                     this.clientList.Remove(client);
                 }
