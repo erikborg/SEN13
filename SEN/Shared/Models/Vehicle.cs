@@ -10,19 +10,19 @@ namespace SEN.Shared.Models
     public class Vehicle
     {
         // the id
-        public string id { get; set; }
+        public string Id { get; set; }
 
         // car bus or bike
-        public VehicleType type { get; set; }
+        public VehicleType Type { get; set; }
 
         // N E S W
-        public Location location { get; set; }
+        public Location Location { get; set; }
 
         // N E S W
-        public Direction direction { get; set; }
+        public Direction Direction { get; set; }
 
         // priority
-        public int priority
+        public int Priority
         {
             get
             {
@@ -39,7 +39,7 @@ namespace SEN.Shared.Models
         {
             get
             {
-                switch (type)
+                switch (Type)
                 {
                     case VehicleType.Bus:
                         return TrafficLightNumber.Bus;
@@ -60,7 +60,7 @@ namespace SEN.Shared.Models
         /// <returns>0 (= Straight), 1 (= Left), 2 (= Right)</returns>
         public int getDirection()
         {
-            var sum = (int)location - (int)direction;
+            var sum = (int)Location - (int)Direction;
 
             return (sum % 2 == 0) ? 0 :
                 (sum == -1 || sum == 3) ? 1 : 2;
@@ -78,7 +78,7 @@ namespace SEN.Shared.Models
             int priority = 0;
 
             //switch the vehicle type to detemine the initial priority.
-            switch (type)
+            switch (Type)
             {
                 case VehicleType.Bus:
                     priority += 10000;
@@ -95,15 +95,15 @@ namespace SEN.Shared.Models
             {
                 //straight
                 case 0:
-                    priority += (location == Location.North || location == Location.South) ? 100 : 40;
+                    priority += (Location == Location.North || Location == Location.South) ? 100 : 40;
                     break;
                 //left
                 case 1:
-                    priority += (location == Location.West || location == Location.East) ? 80 : 60;
+                    priority += (Location == Location.West || Location == Location.East) ? 80 : 60;
                     break;
                 //right
                 case 2:
-                    priority += (location == Location.West || location == Location.East) ? 80 : 60;
+                    priority += (Location == Location.West || Location == Location.East) ? 80 : 60;
                     break;
             }
 

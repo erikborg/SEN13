@@ -1,8 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <Vehicle>
+    <id>3</id>
+    <type>bus</type>
+    <location>North</location>
+    <direction>South</direction>
+  </Vehicle>
+  <Vehicle>
     <id>4</id>
+    <type>bus</type>
+    <location>South</location>
+    <direction>North</direction>
+  </Vehicle>
+  <Vehicle>
+    <id>5</id>
+    <type>bus</type>
+    <location>South</location>
+    <direction>East</direction>
+  </Vehicle>
+  <Vehicle>
+    <id>6</id>
+    <type>bus</type>
+    <location>North</location>
+    <direction>South</direction>
+  </Vehicle>
+  <Vehicle>
+    <id>7</id>
+    <type>bus</type>
+    <location>South</location>
+    <direction>East</direction>
+  </Vehicle>
+  <Vehicle>
+    <id>8</id>
     <type>bike</type>
+    <location>East</location>
+    <direction>North</direction>
+  </Vehicle>
+  <Vehicle>
+    <id>9</id>
+    <type>bike</type>
+    <location>East</location>
+    <direction>North</direction>
+  </Vehicle>
+  <Vehicle>
+    <id>10</id>
+    <type>bike</type>
+    <location>South</location>
+    <direction>East</direction>
+  </Vehicle>
+  <Vehicle>
+    <id>11</id>
+    <type>car</type>
+    <location>South</location>
+    <direction>North</direction>
+  </Vehicle>
+  <Vehicle>
+    <id>12</id>
+    <type>car</type>
+    <location>South</location>
+    <direction>North</direction>
+  </Vehicle>
+  <Vehicle>
+    <id>13</id>
+    <type>car</type>
+    <location>South</location>
+    <direction>East</direction>
+  </Vehicle>
+  <Vehicle>
+    <id>14</id>
+    <type>car</type>
     <location>East</location>
     <direction>South</direction>
   </Vehicle>

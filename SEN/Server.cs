@@ -44,6 +44,7 @@ namespace SEN
                 {
                     TcpClient client = this.tcpListener.AcceptTcpClient();
                     this.clientList.Add(client);
+                    Console.WriteLine("New client connected");
                 }
                 catch (Exception e)
                 {
@@ -62,6 +63,12 @@ namespace SEN
         {
             ASCIIEncoding encoder = new ASCIIEncoding();
             byte[] buffer = encoder.GetBytes(message);
+
+            var newArray = new byte[buffer.Length + 1];
+            buffer.CopyTo(newArray, 0);
+            newArray[newArray.Length - 1] = byte.Parse("16");
+            buffer = newArray;
+
             List<TcpClient> clients = this.clientList.ToList();
 
             foreach (TcpClient client in clients)
