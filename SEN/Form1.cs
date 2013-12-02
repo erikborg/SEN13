@@ -102,11 +102,11 @@ namespace SEN
         {
             string logEntry = "";
 
-            var rnd1 = r.Next(0, 3);
-            var rnd2 = r.Next(0, 3);
+            var rnd1 = r.Next(0, 4);
+            var rnd2 = r.Next(0, 4);
             do
             {
-                rnd2 = r.Next(0, 3);
+                rnd2 = r.Next(0, 4);
             } while (rnd1 == rnd2);
 
             this.location = getLocationOrDirection(rnd1);
