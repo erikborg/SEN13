@@ -35,7 +35,6 @@
             this.createBikeButton = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.ipLabel = new System.Windows.Forms.Label();
-            this.sendButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // serverStartButton
@@ -104,20 +103,9 @@
             this.ipLabel.Size = new System.Drawing.Size(0, 13);
             this.ipLabel.TabIndex = 11;
             // 
-            // sendButton
-            // 
-            this.sendButton.Location = new System.Drawing.Point(310, 132);
-            this.sendButton.Name = "sendButton";
-            this.sendButton.Size = new System.Drawing.Size(75, 23);
-            this.sendButton.TabIndex = 12;
-            this.sendButton.Text = "Send data";
-            this.sendButton.UseVisualStyleBackColor = true;
-            this.sendButton.Click += new System.EventHandler(this.sendButton_Click);
-            // 
             // ProjectSEN
             // 
             this.ClientSize = new System.Drawing.Size(401, 167);
-            this.Controls.Add(this.sendButton);
             this.Controls.Add(this.ipLabel);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.createBikeButton);
@@ -141,7 +129,6 @@
         private System.Windows.Forms.Button createBikeButton;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label ipLabel;
-        private System.Windows.Forms.Button sendButton;
     }
 }
 

@@ -16,7 +16,7 @@ namespace SEN
     class Simulation
     {
         private List<Vehicle> vehicles;
-        private XmlGenerator xmlGenerator;
+        private XmlGenerator VehicleList;
         private State state;
         private Server server;
 
@@ -43,12 +43,12 @@ namespace SEN
 
         private List<bool> grid;
 
-        public Simulation(Server server)
+        public Simulation(Server _Server, XmlGenerator _VehicleList)
         {
-            this.server = server;
+            this.server = _Server;
             this.state = new State();
             this.vehicles = new List<Vehicle>();
-            xmlGenerator = new XmlGenerator();
+            this.VehicleList = _VehicleList;
         }
 
         public void Run()
@@ -58,7 +58,7 @@ namespace SEN
                 State state = new State();
 
                 //Add vehicles, lights and actions
-                state.VehicleState = this.xmlGenerator.readFromXml();
+                state.VehicleState = VehicleList.getVehicles();
                 state.LightState = getLightsAndState(state.VehicleState);
                 state.Action = this.Actions;
 
@@ -67,7 +67,7 @@ namespace SEN
                 server.sendString(json);
 
                 //remove the vehicles with actions from the xml
-                this.xmlGenerator.ClearXML(this.Actions);
+                VehicleList.ClearActions(this.Actions);
                 // wait van 10000 miliseconden, of meer :)
                 Thread.Sleep(5000);
             }

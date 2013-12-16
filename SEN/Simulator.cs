@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using SEN.Shared.Models;
 
 namespace SEN
 {
@@ -12,11 +13,11 @@ namespace SEN
         Simulation simulation;
         Thread simThread;
 
-        public Simulator(Server server)
+        public Simulator(Server Server, XmlGenerator VehicleList)
         {
-            if (server != null)
+            if (Server != null)
             {
-                simulation = new Simulation(server);
+                simulation = new Simulation(Server, VehicleList);
                 simThread = new Thread(new ThreadStart(simulation.Run));
             }
         }
