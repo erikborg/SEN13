@@ -75,8 +75,10 @@ namespace SEN
                 for (int i = 0; i < VehicleList.Count; i++)
                 {
                     Vehicle vehicle = VehicleList[i];
-                    ActionList.Contains(vehicle.Id);
-                    VehicleList.RemoveAt(i);
+                    if (ActionList.Contains(vehicle.Id))
+                    {
+                        VehicleList.RemoveAt(i);
+                    }
                 }
             }
         }

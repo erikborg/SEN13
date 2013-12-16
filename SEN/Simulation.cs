@@ -109,50 +109,53 @@ namespace SEN
 
         private List<Light> getLightState(List<Light> lights, List<Vehicle> vehicles, List<string> actions, List<Light> greenLights, int index)
         {
-            var topPrioLight = (from a in lights
-                                from b in vehicles
-                                where (a.Location == b.Location && a.Number == b.TrafficLightNumber)
-                                orderby b.Priority descending
-                                select b).ToList();
-
-            if (index < topPrioLight.Count)
+            lock (ProjectSEN._lock)
             {
+                var topPrioLight = (from a in lights
+                                    from b in vehicles
+                                    where (a.Location == b.Location && a.Number == b.TrafficLightNumber)
+                                    orderby b.Priority descending
+                                    select b).ToList();
 
-                // Traffic light with the highest prio is turned green if the given route is still free
-                if (checkIfRouteIsAvailable(topPrioLight[index].Location, topPrioLight[index].Direction))
+                if (index < topPrioLight.Count)
                 {
-                    switch (topPrioLight[index].Type)
+
+                    // Traffic light with the highest prio is turned green if the given route is still free
+                    if (checkIfRouteIsAvailable(topPrioLight[index].Location, topPrioLight[index].Direction))
                     {
-                        // Extra check for the green light in case we're dealing with a left- or right turning bus
-                        case VehicleType.Bus:
-                            int direc = getDirection((int)topPrioLight[index].Location, (int)topPrioLight[index].Direction);
-                            if (direc == 1)
-                            {
-                                lights.Where(x => ((x.Location == topPrioLight[index].Location) && (x.Number == topPrioLight[index].TrafficLightNumber))).First().State = TrafficLightState.BusLeft;
-                            }
-                            else if (direc == 2)
-                            {
-                                lights.Where(x => ((x.Location == topPrioLight[index].Location) && (x.Number == topPrioLight[index].TrafficLightNumber))).First().State = TrafficLightState.BusRight;
-                            }
-                            else if (direc == 0)
-                            {
+                        switch (topPrioLight[index].Type)
+                        {
+                            // Extra check for the green light in case we're dealing with a left- or right turning bus
+                            case VehicleType.Bus:
+                                int direc = getDirection((int)topPrioLight[index].Location, (int)topPrioLight[index].Direction);
+                                if (direc == 1)
+                                {
+                                    lights.Where(x => ((x.Location == topPrioLight[index].Location) && (x.Number == topPrioLight[index].TrafficLightNumber))).First().State = TrafficLightState.BusLeft;
+                                }
+                                else if (direc == 2)
+                                {
+                                    lights.Where(x => ((x.Location == topPrioLight[index].Location) && (x.Number == topPrioLight[index].TrafficLightNumber))).First().State = TrafficLightState.BusRight;
+                                }
+                                else if (direc == 0)
+                                {
+                                    lights.Where(x => ((x.Location == topPrioLight[index].Location) && (x.Number == topPrioLight[index].TrafficLightNumber))).First().State = TrafficLightState.GreenOrBusStraight;
+                                }
+                                break;
+
+                            // In all other cases use the regular green light state
+                            default:
                                 lights.Where(x => ((x.Location == topPrioLight[index].Location) && (x.Number == topPrioLight[index].TrafficLightNumber))).First().State = TrafficLightState.GreenOrBusStraight;
-                            }
-                            break;
-
-                        // In all other cases use the regular green light state
-                        default:
-                            lights.Where(x => ((x.Location == topPrioLight[index].Location) && (x.Number == topPrioLight[index].TrafficLightNumber))).First().State = TrafficLightState.GreenOrBusStraight;
-                            break;
+                                break;
+                        }
+                        //add the newly turned green light to the list of green lights
+                        greenLights.Add(lights.Where(x => ((x.Location == topPrioLight[index].Location) && (x.Number == topPrioLight[index].TrafficLightNumber))).First());
+                        actions.Add(topPrioLight[index].Id);
                     }
-                    //add the newly turned green light to the list of green lights
-                    greenLights.Add(lights.Where(x => ((x.Location == topPrioLight[index].Location) && (x.Number == topPrioLight[index].TrafficLightNumber))).First());
-                    actions.Add(topPrioLight[index].Id);
+                    getLightState(lights, vehicles, actions, greenLights, ++index);
                 }
-                getLightState(lights, vehicles, actions, greenLights, ++index);
-            }
 
-            return lights;
+                return lights;
+            }
         }
 
         public int getDirection(int location, int direction)
