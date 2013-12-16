@@ -49,36 +49,6 @@ namespace SEN
             this.state = new State();
             this.vehicles = new List<Vehicle>();
             xmlGenerator = new XmlGenerator();
-            this.readFromXml();
-        }
-
-        private List<Vehicle> readFromXml()
-        {
-            List<Vehicle> vehicles = new List<Vehicle>();
-            xmlGenerator.xml = XDocument.Load(XmlGenerator.path);
-
-            foreach (XElement vehic in xmlGenerator.xml.Root.Nodes())
-            {
-                Vehicle vehicle = new Vehicle();
-                vehicle.Id = vehic.Element("id").Value;
-
-                vehicle.Type =
-                    (vehic.Element("type").Value.ToLower() == "car") ? VehicleType.Car :
-                    (vehic.Element("type").Value.ToLower() == "bike") ? VehicleType.Bicycle : VehicleType.Bus;
-
-                vehicle.Location =
-                    vehic.Element("location").Value.ToLower() == "north" ? Location.North :
-                    vehic.Element("location").Value.ToLower() == "east" ? Location.East :
-                    vehic.Element("location").Value.ToLower() == "south" ? Location.South : Location.West;
-
-                vehicle.Direction =
-                    vehic.Element("direction").Value.ToLower() == "north" ? Direction.North :
-                    vehic.Element("direction").Value.ToLower() == "east" ? Direction.East :
-                    vehic.Element("direction").Value.ToLower() == "south" ? Direction.South : Direction.West;
-
-                vehicles.Add(vehicle);
-            }
-            return vehicles;
         }
 
         public void Run()
@@ -88,7 +58,7 @@ namespace SEN
                 State state = new State();
 
                 //Add vehicles, lights and actions
-                state.VehicleState = readFromXml();
+                state.VehicleState = this.xmlGenerator.readFromXml();
                 state.LightState = getLightsAndState(state.VehicleState);
                 state.Action = this.Actions;
 

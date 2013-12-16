@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using SEN.Shared.Models;
+using SEN.Shared.Enums;
+using SEN.Shared;
 
 namespace SEN
 {
@@ -16,6 +19,8 @@ namespace SEN
         //the xdoc representation of our XML
         public XDocument xml;
 
+        private Object xmlLock = new Object();
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -25,6 +30,38 @@ namespace SEN
 
             //load the xml from the set path
             xml = XDocument.Load(path);
+        }
+
+        public List<Vehicle> readFromXml()
+        {
+            List<Vehicle> vehicles = new List<Vehicle>();
+            xml = XDocument.Load(XmlGenerator.path);
+
+            lock (xmlLock)
+            {
+                foreach (XElement vehic in xml.Root.Nodes())
+                {
+                    Vehicle vehicle = new Vehicle();
+                    vehicle.Id = vehic.Element("id").Value;
+
+                    vehicle.Type =
+                        (vehic.Element("type").Value.ToLower() == "car") ? VehicleType.Car :
+                        (vehic.Element("type").Value.ToLower() == "bike") ? VehicleType.Bicycle : VehicleType.Bus;
+
+                    vehicle.Location =
+                        vehic.Element("location").Value.ToLower() == "north" ? Location.North :
+                        vehic.Element("location").Value.ToLower() == "east" ? Location.East :
+                        vehic.Element("location").Value.ToLower() == "south" ? Location.South : Location.West;
+
+                    vehicle.Direction =
+                        vehic.Element("direction").Value.ToLower() == "north" ? Direction.North :
+                        vehic.Element("direction").Value.ToLower() == "east" ? Direction.East :
+                        vehic.Element("direction").Value.ToLower() == "south" ? Direction.South : Direction.West;
+
+                    vehicles.Add(vehicle);
+                }
+            }
+            return vehicles;
         }
 
         /// <summary>
@@ -38,20 +75,23 @@ namespace SEN
         {
             try
             {
-                //add nodes, representing the vehicle
-                XElement vehicle =
-                    new XElement("Vehicle",
-                        new XElement("id", id),
-                        new XElement("type", type),
-                        new XElement("location", location),
-                        new XElement("direction", direction));
+                lock (xmlLock)
+                {
+                    //add nodes, representing the vehicle
+                    XElement vehicle =
+                        new XElement("Vehicle",
+                            new XElement("id", id),
+                            new XElement("type", type),
+                            new XElement("location", location),
+                            new XElement("direction", direction));
 
-                //add the nodes to the root element
-                xml.Element("root").Add(vehicle);
+                    //add the nodes to the root element
+                    xml.Element("root").Add(vehicle);
 
-                //save the changes to the file
-                //move the save action to a different spot when adding bulk data
-                xml.Save(path);
+                    //save the changes to the file
+                    //move the save action to a different spot when adding bulk data
+                    xml.Save(path);
+                }
 
                 return true;
             }
@@ -69,9 +109,12 @@ namespace SEN
         {
             try
             {
-                //remove all childs of the root and save the file
-                xml.Element("root").RemoveAll();
-                xml.Save(path);
+                lock (xmlLock)
+                {
+                    //remove all childs of the root and save the file
+                    xml.Element("root").RemoveAll();
+                    xml.Save(path);
+                }
                 return true;
             }
             catch (Exception e)
@@ -90,10 +133,18 @@ namespace SEN
             {
                 try
                 {
-                    xml.Descendants("Vehicle")
-                       .Where(child => child.Descendants("id").First().Value == a)
-                       .Remove();
-                    xml.Save(path);
+                    lock (xmlLock)
+                    {
+                        List<XElement> list = xml.Root.Elements("Vehicle").ToList<XElement>();
+                        foreach (XElement Vehicle in list)
+                        {
+                            if (Vehicle.Element("id").Value == a)
+                            {
+                                Vehicle.Remove();
+                            }
+                        }
+                        xml.Save(path);
+                    }
                 }
                 catch (Exception e)
                 {
